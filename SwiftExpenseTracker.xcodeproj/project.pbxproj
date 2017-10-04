@@ -13,6 +13,7 @@
 		9D570FCA1F853F1200BC81C0 /* SwiftExpenseTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D570FC81F853F1200BC81C0 /* SwiftExpenseTracker.xcdatamodeld */; };
 		9D570FCC1F853F1200BC81C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D570FCB1F853F1200BC81C0 /* Assets.xcassets */; };
 		9D570FCF1F853F1200BC81C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D570FCD1F853F1200BC81C0 /* LaunchScreen.storyboard */; };
+		9D570FD71F85418700BC81C0 /* ViewControllerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D570FD61F85418700BC81C0 /* ViewControllerSecond.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		9D570FCB1F853F1200BC81C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D570FCE1F853F1200BC81C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D570FD01F853F1200BC81C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D570FD61F85418700BC81C0 /* ViewControllerSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSecond.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				9D570FCD1F853F1200BC81C0 /* LaunchScreen.storyboard */,
 				9D570FD01F853F1200BC81C0 /* Info.plist */,
 				9D570FC81F853F1200BC81C0 /* SwiftExpenseTracker.xcdatamodeld */,
+				9D570FD61F85418700BC81C0 /* ViewControllerSecond.swift */,
 			);
 			path = SwiftExpenseTracker;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D570FD71F85418700BC81C0 /* ViewControllerSecond.swift in Sources */,
 				9D570FC41F853F1200BC81C0 /* ViewController.swift in Sources */,
 				9D570FC21F853F1200BC81C0 /* AppDelegate.swift in Sources */,
 				9D570FCA1F853F1200BC81C0 /* SwiftExpenseTracker.xcdatamodeld in Sources */,
