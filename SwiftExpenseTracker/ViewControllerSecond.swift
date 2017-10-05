@@ -33,15 +33,14 @@ class ViewControllerSecond: UIViewController {
         
         if !dataInfo.isEmpty {
             nameOfPlace.text = dataInfo[0].name
-            amount.text = String(format:"%.2f", dataInfo[0].amount!)
+            let fmt = NumberFormatter()
+            amount.text = fmt.string(from: dataInfo[0].amount!)
             category.text = dataInfo[0].category
             formOfPayment.text = dataInfo[0].formOfPayment
             date.date = dataInfo[0].date!
         }
-
     }
 
-    
     @objc func saveButtonTapped(_ sender: UIButton){
         if !dataInfo.isEmpty{
             let data = dataInfo[0]

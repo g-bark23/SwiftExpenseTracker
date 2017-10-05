@@ -25,7 +25,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         cell.textLabel?.text = dataInfo[indexPath.row].name
-        cell.detailTextLabel?.text = "$" + String(format:"%.2f", dataInfo[indexPath.row].amount!)
+        let fmt = NumberFormatter()
+        cell.detailTextLabel?.text = "$" + fmt.string(from: dataInfo[indexPath.row].amount!)!
      return cell
      }
     
@@ -64,7 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     public func reloadTable(){
         getData()
-        myTable.reloadData()
+      //  myTable.reloadData()
     }
 
 }
