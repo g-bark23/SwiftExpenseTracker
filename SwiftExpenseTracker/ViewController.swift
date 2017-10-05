@@ -8,34 +8,37 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let context = (UIApplication.shared.delegate as!
         AppDelegate).persistentContainer.viewContext
     
-    var dataInfo: [Payments] = []
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dataInfo.count)
-    }
+    @IBOutlet var myTable: UITableView!
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    var dataInfo: [Payments] = []
+    var selectedObject: [Payments] = []
+     
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     return (dataInfo.count)
+     }
+     
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         cell.textLabel?.text = dataInfo[indexPath.row].name
-        return cell
-    }
-  /*
+        cell.detailTextLabel?.text = "$" + String(format:"%.2f", dataInfo[indexPath.row].amount!)
+     return cell
+     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        performSegue(withIdentifier: "show", sender: nil)
+        selectedObject = [dataInfo[indexPath.row]]
+        performSegue(withIdentifier: "addSegue", sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-  */
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         getData()
-       
         print(dataInfo as Any)
     }
 
@@ -52,7 +55,17 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! ViewControllerSecond
+        vc.dataInfo = selectedObject
+        selectedObject.removeAll()
+    }
+    
+    public func reloadTable(){
+        getData()
+        myTable.reloadData()
+    }
 
 }
 

@@ -30,18 +30,40 @@ class ViewControllerSecond: UIViewController {
                                       action: #selector(deleteButtonTapped(_:)))
         
         self.navigationItem.rightBarButtonItems = [saveBTN, deleteBTN]
+        
+        if !dataInfo.isEmpty {
+            nameOfPlace.text = dataInfo[0].name
+            amount.text = String(format:"%.2f", dataInfo[0].amount!)
+            category.text = dataInfo[0].category
+            formOfPayment.text = dataInfo[0].formOfPayment
+            date.date = dataInfo[0].date!
+        }
+
     }
+
     
     @objc func saveButtonTapped(_ sender: UIButton){
-        let data = Payments(context: context)
-        data.name = nameOfPlace.text
-        data.amount = Decimal(string: amount.text!)! as NSDecimalNumber
-        data.category = category.text
-        data.formOfPayment = formOfPayment.text
-        data.date = date.date
+        if !dataInfo.isEmpty{
+            let data = dataInfo[0]
+            data.name = nameOfPlace.text
+            data.amount = Decimal(string: amount.text!)! as NSDecimalNumber
+            data.category = category.text
+            data.formOfPayment = formOfPayment.text
+            data.date = date.date
+        }
+        else{
+            let data = Payments(context: context)
+            data.name = nameOfPlace.text
+            data.amount = Decimal(string: amount.text!)! as NSDecimalNumber
+            data.category = category.text
+            data.formOfPayment = formOfPayment.text
+            data.date = date.date
+        }
         
         do {
             try context.save()
+            ViewController().reloadTable()
+            _ = navigationController?.popViewController(animated: true)
         } catch {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -49,7 +71,19 @@ class ViewControllerSecond: UIViewController {
     }
     
     @objc func deleteButtonTapped(_ sender: UIButton){
-        
+        if !dataInfo.isEmpty{
+            let data = dataInfo[0]
+            context.delete(data)
+            
+            do {
+                try context.save()
+                ViewController().reloadTable()
+                _ = navigationController?.popViewController(animated: true)
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
