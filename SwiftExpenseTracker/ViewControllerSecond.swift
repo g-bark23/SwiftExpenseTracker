@@ -24,17 +24,17 @@ class ViewControllerSecond: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
         let saveBTN = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.save, target:self,
                                       action: #selector(saveButtonTapped(_:)))
         let deleteBTN = UIBarButtonItem(barButtonSystemItem:UIBarButtonSystemItem.trash, target:self,
                                       action: #selector(deleteButtonTapped(_:)))
-        
+
         self.navigationItem.rightBarButtonItems = [saveBTN, deleteBTN]
         
         if !dataInfo.isEmpty {
             nameOfPlace.text = dataInfo[0].name
-            let fmt = NumberFormatter()
-            amount.text = fmt.string(from: dataInfo[0].amount!)
+            amount.text = (NSString(format: "%.2f", (dataInfo[0].amount as! Double) as CVarArg) as String)
             category.text = dataInfo[0].category
             formOfPayment.text = dataInfo[0].formOfPayment
             date.date = dataInfo[0].date!
@@ -50,6 +50,9 @@ class ViewControllerSecond: UIViewController {
             data.formOfPayment = formOfPayment.text
             data.date = date.date
         }
+        else if nameOfPlace.text == "" || amount.text == "" || category.text == "" || formOfPayment.text == ""{
+            return
+        }
         else{
             let data = Payments(context: context)
             data.name = nameOfPlace.text
@@ -61,8 +64,7 @@ class ViewControllerSecond: UIViewController {
         
         do {
             try context.save()
-            ViewController().reloadTable()
-            _ = navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
         } catch {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -76,8 +78,7 @@ class ViewControllerSecond: UIViewController {
             
             do {
                 try context.save()
-                ViewController().reloadTable()
-                _ = navigationController?.popViewController(animated: true)
+                navigationController?.popViewController(animated: true)
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -89,7 +90,6 @@ class ViewControllerSecond: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
